@@ -1,13 +1,5 @@
 #!/bin/bash
 
-echo "Starting HBASE"
-/home/vagrant/start_hbase.sh
-echo
-if [ $? -ne 0 ]; then
-	echo "**ERROR** something went wrong when starting hbase, aborting"
-	exit $?
-fi
-
 echo "Starting TSDB"
 /home/vagrant/start_tsdb.sh
 echo

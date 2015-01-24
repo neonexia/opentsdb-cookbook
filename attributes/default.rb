@@ -1,9 +1,7 @@
 default['opentsdb']['ifcfg'] = 'lo'
 default['opentsdb']['user'] = 'root'
-# HBase stuff
-default['opentsdb']['hbase_rootdir'] = '/var/spool/tsdhbase'
-default['opentsdb']['hbase_installdir'] = '/usr/local'
-default['opentsdb']['hbase_version'] = '0.94.24'
+# HBase stuff. Hbase home dir
+default['opentsdb']['hbase_home'] = '/usr/lib/hbase/'
 # OpenTSDB stuff
 default['opentsdb']['tsdb_installdir'] = '/usr/local'
 default['opentsdb']['tsdb_cachedir'] ='/var/cache/tsdb'
@@ -26,7 +24,7 @@ default['opentsdb']['tsdb_cors_fixed_port'] = 4243
 default['grafana']['datasources'] = {
 	'opentsdb' => { 'type' => 'opentsdb', 'url' => "'http://'+window.location.hostname+':#{node['opentsdb']['tsdb_cors_fixed_port']}'", 'default' => 'true'},
 }
-# packaging tool 
+# packaging tool
 if platform_family?("rhel")
   default['opentsdb']['packager_recipes'] = ['yum','yum-epel']
   # default tools
@@ -38,5 +36,3 @@ elsif platform_family?("debian")
 else
   default['opentsdb']['packager_recipes'] = nil
 end
-
-

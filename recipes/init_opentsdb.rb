@@ -8,3 +8,10 @@ execute "create OpenTSDB hbase tables" do
 	command "./create_table.sh >> /var/log/hbase.create_tsdb_tables.log 2>&1"
 	environment ({'HBASE_HOME' => "#{node['opentsdb']['hbase_home']}", "COMPRESSION" => "none"})
 end
+
+directory "#{node['opentsdb']['tsdb_installdir']}/opentsdb/build/staticroot" do
+	owner node['opentsdb']['user']
+	group node['opentsdb']['user']
+	mode '0644'
+	action :create
+end

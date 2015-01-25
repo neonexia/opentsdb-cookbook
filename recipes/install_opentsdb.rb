@@ -20,12 +20,12 @@
 
 include_recipe 'opentsdb::prepare'
 
-# directory node['opentsdb']['tsdb_cachedir'] do
-# 	action :create
-# end
+remote_file '/tmp/opentsdb-2.0.1.noarch.rpm' do
+	source 'https://github.com/OpenTSDB/opentsdb/releases/download/v2.0.1/opentsdb-2.0.1.noarch.rpm'
+end
 
-package 'opentsdb' do
+package 'opentsdb.noarch' do
 	action :install
-	source "https://github.com/OpenTSDB/opentsdb/releases/download/v2.0.1/opentsdb-2.0.1.noarch.rpm"
+	source '/tmp/opentsdb-2.0.1.noarch.rpm'
 	provider Chef::Provider::Package::Rpm
 end

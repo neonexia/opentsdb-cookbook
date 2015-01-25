@@ -3,7 +3,7 @@ node['opentsdb']['packager_recipes'].each() do | recipe |
 end
 
 include_recipe "ntp"
-include_recipe "java"
+#include_recipe "java"
 
 package_list = Array.new(node['opentsdb']['tools'])
 package_list.push('gnuplot')

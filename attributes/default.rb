@@ -1,15 +1,15 @@
-default['opentsdb']['ifcfg'] = 'lo'
 default['opentsdb']['user'] = 'root'
 # HBase stuff. Hbase home dir
 default['opentsdb']['hbase_home'] = '/usr/lib/hbase/'
 # OpenTSDB stuff
-default['opentsdb']['tsdb_installdir'] = '/usr/local'
+default['opentsdb']['tsdb_installdir'] = '/usr/share'
 default['opentsdb']['tsdb_cachedir'] ='/var/cache/tsdb'
 default['opentsdb']['tsdb_repo'] = 'https://github.com/OpenTSDB/opentsdb.git'
 default['opentsdb']['tsdb_branch'] = 'master'
 default['opentsdb']['build_from_src'] = true
 default['opentsdb']['tsdb_port'] = 4242
 default['opentsdb']['tsdb_autometrics'] = true
+default['opentsdb']['zk_quorum'] = 'localhost'
 # tcollector stuff
 default['opentsdb']['tcollector_repo'] = 'https://github.com/OpenTSDB/tcollector.git'
 default['opentsdb']['tcollector_installdir'] = '/usr/local'

@@ -20,27 +20,12 @@
 
 include_recipe 'opentsdb::prepare'
 
-directory node['opentsdb']['tsdb_cachedir'] do
-	action :create
-end
+# directory node['opentsdb']['tsdb_cachedir'] do
+# 	action :create
+# end
 
-if node['opentsdb']['build_from_src']
-	log 'Building OpentTSDB from source'
-	execute "git clone opentsdb" do
-		cwd node['opentsdb']['tsdb_installdir']
-		command "git clone -b #{node['opentsdb']['tsdb_branch']} #{node['opentsdb']['tsdb_repo']}"
-		creates "#{node['opentsdb']['tsdb_installdir']}/opentsdb"
-	end	
-	execute "build opentsdb" do
-		cwd "#{node['opentsdb']['tsdb_installdir']}/opentsdb"
-		command "./build.sh"
-		not_if "test -f #{node['opentsdb']['tsdb_installdir']}/opentsdb/build/tsdb-*.jar"
-	end
-else
-	log 'Skipping the build of OpentTSDB from source'
-end
-
-template "/home/vagrant/start_tsdb.sh" do
-  source "start_tsdb.sh.erb"
-  mode "0755"
+package 'opentsdb' do
+	action :install
+	source "https://github.com/OpenTSDB/opentsdb/releases/download/v2.0.1/opentsdb-2.0.1.noarch.rpm"
+	provider Chef::Provider::Package::Rpm
 end
